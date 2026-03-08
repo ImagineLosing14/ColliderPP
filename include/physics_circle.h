@@ -8,7 +8,6 @@ class Circle : public PhysicsObject {
 private:
     float radius;
     sf::CircleShape shape;
-    ShapeID ID = ShapeID::CIRCLE_SHAPE;
 
     void sync();
 public:
@@ -18,6 +17,9 @@ public:
     void draw(sf::RenderWindow& window) override;
 
     float getRadius() const;
+    void setRadius(const float r);
+
+    const sf::FloatRect getGlobalBounds() const;
 };
 
 #endif

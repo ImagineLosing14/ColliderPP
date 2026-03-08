@@ -20,7 +20,7 @@ private:
 
 public:
     //Constructor
-    PhysicsObject(ShapeID id, const sf::Vector2f& pos,const PhysicalAttributes& attr = PhysicalAttributes::DEFAULT_PHYSICS_ATTRIBUTES,bool isStatic = false);
+    PhysicsObject(ShapeID id, const sf::Vector2f& pos, const PhysicalAttributes& attr = PhysicalAttributes::DEFAULT_PHYSICS_ATTRIBUTES,bool isStatic = false);
 
     virtual ~PhysicsObject();
 
@@ -51,7 +51,7 @@ public:
     void applyForce(const sf::Vector2f& force);
     void applyImpulse(const sf::Vector2f& impulse);
 
-    virtual sf::FloatRect getGlobalBounds() const =0;
+    virtual const sf::FloatRect getGlobalBounds() const =0;
 
     virtual bool checkCollision(PhysicsObject& other)=0;
     virtual void resolveCollision(PhysicsObject& other) =0;

@@ -1,0 +1,8 @@
+Circle class
+inherit
+
+properties:
+radius centre color
+aabb method
+research sf::rectfloat
+check collision bw 2 circles (dont forget to add a check for what type the object is)
