@@ -3,15 +3,15 @@
 #include <iostream>
 #include <unordered_map>
 
-class Any{
+class JObject{
 private:
     std::string type;
     union {
         int ivalue;
         float fvalue;
         std::string* svalue;
-        std::vector<Any>* lvalues;
-        std::unordered_map<std::string,Any>* mvalues;
+        std::vector<JObject>* lvalues;
+        std::unordered_map<std::string,JObject>* mvalues;
     } data;
 
     void check_error(const std::string& target) const {
@@ -20,59 +20,83 @@ private:
         }
     }
 
+    void clean_data(){
+        if (type == "string") delete data.svalue;
+        if (type == "list") delete data.lvalues;
+        if (type == "dict") delete data.mvalues; 
+
+        type = "";
+    }
+    void deep_copy_data(const JObject& other){
+        type = other.type;
+        if (type == "int") data.ivalue = other.data.ivalue;
+        else if (type == "float") data.fvalue = other.data.fvalue;
+        else if (type == "string") data.svalue = new std::string(*other.data.svalue);
+        else if (type == "list") data.lvalues = new std::vector<JObject>(*other.data.lvalues);
+        else if (type == "dict") data.mvalues = new std::unordered_map<std::string, JObject>(*other.data.mvalues);
+        else std::cerr<<"Uninitialed JObject being copied\n";
+    }
+
 public:
-    Any(int a) {
+    JObject() = delete;
+    JObject(int a) {
         type = "int";
         data.ivalue = a;
     }
 
-    Any(float a) {
+    JObject(float a) {
         type = "float";
         data.fvalue = a;
     }
 
-    Any(const std::string &a) {
+    JObject(const std::string &a) {
         type = "string";
         data.svalue = new std::string(a);
     }
 
-    Any(const std::vector<Any> a) {
+    JObject(const std::vector<JObject>& a) {
         type = "list";
         data.lvalues = new std::vector(a);
     }
 
-    Any(std::unordered_map<std::string, Any> a) {
+    JObject(const std::unordered_map<std::string, JObject>& a) {
         type = "dict";
         data.mvalues = new std::unordered_map(a);
     }
 
-    ~Any () {
-        if (type == "string") delete data.svalue;
-        if (type == "list") delete data.lvalues;
-        if (type == "dict") delete data.mvalues; 
+    ~JObject () {
+        clean_data();
     }
+
+
+
 
     operator int() const {
         check_error("int");
         return data.ivalue;
     }
-
     operator float() const {
         check_error("float");
         return data.fvalue;
     }
-
     operator std::string() const {
         check_error("string");
         return *data.svalue;
     }
+    operator std::vector<JObject>() const{
+        check_error("list");
+        return *data.lvalues;
+    }
+    operator std::unordered_map<std::string,JObject>() const{
+        check_error("dict");
+        return *data.lvalues;   
+    }
 
-    const Any& operator[](int idx) const {
-        std::cout<<"1\n";
+    const JObject& operator[](int idx) const {
         check_error("list");
         return data.lvalues->at(idx);
     }
-    const Any& operator[](const std::string key) const {
+    const JObject& operator[](const std::string& key) const {
         check_error("dict");
         return data.mvalues->at(key);
     }

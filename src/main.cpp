@@ -8,6 +8,8 @@ int main(){
     std::vector<Any> b = {24,6};
     std::vector<Any> big = {a,b};
     
+    std::vector<Any> x = big[0];
+    cout<<(int)x[1]<<'\n';
     int c = big[0][0];
 
 
