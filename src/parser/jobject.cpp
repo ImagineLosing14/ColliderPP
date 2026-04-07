@@ -1,4 +1,4 @@
-#include "JObject.h"
+#include "jobject.h"
 
 void JObject::check_error(const std::string& target) const {
     if (target != type)
