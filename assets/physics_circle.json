@@ -1,0 +1,8 @@
+{
+    "Circle":{
+        "radius":5
+    },
+    "PhysicsObject": {
+        "position":[25, 25]
+    }
+}
