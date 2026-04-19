@@ -74,10 +74,14 @@ void PhysicsObject::setAttributes(const PhysicalAttributes& newAttributes){
 
 
 
-void PhysicsObject::update(sf::Time dt){
-    velocity+=acceleration*dt.asSeconds();
-    position+=velocity*dt.asSeconds();
+void PhysicsObject::update(sf::Time dt , sf::RenderWindow& window){
+    velocity += acceleration*dt.asSeconds();
+    position += velocity*dt.asSeconds();
+    angularVelocity += angularAcceleration*dt.asSeconds();
+    angle += angularVelocity*dt.asSeconds();
     acceleration = sf::Vector2f(0.f, 0.f);
+    angularAcceleration = sf::Vector2f(0.f , 0.f);
+
 }
 
 // Position can be used for ang acc next tenure
