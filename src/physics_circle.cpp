@@ -20,8 +20,8 @@ void Circle::sync() {
     shape.setPosition(PhysicsObject::getPosition());
 }
 
-void Circle::update(sf::Time dt) {
-    PhysicsObject::update(dt);
+void Circle::update(sf::Time dt, sf::RenderWindow& window) {
+    PhysicsObject::update(dt, window);
     sync();
 }
 

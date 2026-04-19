@@ -14,7 +14,7 @@ public:
     //Circle(float r, sf::Vector2f position);
     Circle(const JObject &obj_circle);
 
-    void update(sf::Time deltaTime) override;
+    void update(sf::Time deltaTime, sf::RenderWindow& window) override;
     void draw(sf::RenderWindow& window) override;
 
     float getRadius() const;

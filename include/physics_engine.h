@@ -17,7 +17,7 @@ public:
   void addObject(std::unique_ptr<PhysicsObject> obj);
 
   
-  void update(sf::Time dt);
+  void update(sf::Time dt, sf::RenderWindow& window);
   void draw(sf::RenderWindow& window);
 };
 
