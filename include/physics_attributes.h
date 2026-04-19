@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "jobject.h"
+#include "mjson/jobject.h"
 
 struct PhysicalAttributes {
     float mass;
