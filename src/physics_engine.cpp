@@ -31,7 +31,7 @@ bool circlecircleCollision(PhysicsObject* a, PhysicsObject* b) {
 
 //*PhysicsEngine::collisionTable[0][0] = circlecircleCollision;
 
-void PhysicsEngine::addObject(std::unique_ptr<PhysicsObject> obj) {
+void PhysicsEngine::addObject(PhysicsObject* obj) {
     objects.push_back(std::move(obj));
 }
 
