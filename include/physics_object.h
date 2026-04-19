@@ -53,6 +53,6 @@ public:
 
     virtual const sf::FloatRect getGlobalBounds() const =0;
 
-    virtual void update(sf::Time dt);
+    virtual void update(sf::Time dt , sf::RenderWindow& window);
     virtual void draw(sf::RenderWindow& window) = 0;
 };

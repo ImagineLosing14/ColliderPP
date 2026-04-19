@@ -66,5 +66,5 @@ void PhySimulator::run(){
 }
 
 void PhySimulator::update(){
-    engine.update(dt);
+    engine.update(dt , window);
 }

@@ -14,6 +14,40 @@
         return 0;
     }
 
+    static bool ResolveBoundaryCollision(PhysicsObject &a, sf::RenderWindow &window) {
+        float r = a.getRadius();
+        sf::Vector2f p = a.getPosition();
+        sf::Vector2f v = a.getVelocity();
+        sf::Vector2f w = sf::Vector2f(window.getSize());
+        sf::Vector2f v_new = v;
+        sf::Vector2f p_new = p;
+        bool collided = false;
+
+        if (p.x - r < 0.f) {
+            v_new.x = std:abs (v_new.x) ;
+            p_new.x = r;
+            collided = true;
+        }else if (p.x + r > w[0]){
+            v_new.x = -1* std:abs (v_new.x) ;
+            p_new.x = w.x - r;
+            collided = true;
+        }
+        if (p.y - r < 0.f) {
+            v_new.y = std:abs (v_new.y) ;
+            p_new.y = r;
+            collided = true;
+        }else if (p.y + r > w.y){
+            v_new.y = -1* std:abs (v_new.y) ;
+            p_new.y = w.y - r;
+            collided = true;
+        }
+
+        a.setPosition(p_new);
+        a.setVelocity(v_new);
+
+        return collided;
+    }
+
     static sf::Vector2f move(PhysicsObject &a,PhysicsObject &b,sf::Vector2f &direction){
         b.setPosition(b.getPosition()+(direction / 2.0f));
         a.setPosition(a.getPosition()-(direction / 2.0f));
