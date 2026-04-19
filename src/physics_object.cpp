@@ -84,15 +84,16 @@ void PhysicsObject::update(sf::Time dt , sf::RenderWindow& window){
 
 }
 
-
-void PhysicsObject::applyForce(const sf::Vector2f& force){
+// Position can be used for ang acc next tenure
+void PhysicsObject::applyForce(const sf::Vector2f& force, const sf::Vector2f& position){
     if (attributes.is_static) {
         return;
     }
     acceleration+=force/attributes.mass;
 }
 
-void PhysicsObject::applyImpulse(const sf::Vector2f& impulse){
+// Position can be used for ang acc next tenure
+void PhysicsObject::applyImpulse(const sf::Vector2f& impulse, const sf::Vector2f& position){
     if (attributes.is_static){
         return;
     }
